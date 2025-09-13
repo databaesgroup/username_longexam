@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.all(24),
         children: [
           const SizedBox(height: 60),
-          Image.asset('assets/images/login_header.jpg',
+          Image.asset('assets/images/login_header.png',
               height: 160, fit: BoxFit.contain),
           const SizedBox(height: 24),
           Form(

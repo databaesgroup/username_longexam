@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/user_service.dart';
+import '../models/user_model.dart';
 import 'login_screen.dart';
 import 'home_screen.dart';
 
@@ -26,7 +27,18 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (_) => const LoginScreen()),
         );
       } else {
-        await UserService().getUserData().catchError((_) {});
+        await UserService().getUserData().catchError((_) {
+          // Return a default AppUser to satisfy the required return type
+          return AppUser(
+            id: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            username: '',
+            type: 'user',
+            isActive: false,
+          );
+        });
         if (!mounted) return;
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const HomeScreen()),
@@ -46,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset('assets/images/splash_bg.jpg', fit: BoxFit.cover),
+          Image.asset('assets/images/splash_bg.png', fit: BoxFit.cover),
           const Center(child: CircularProgressIndicator()),
         ],
       ),
